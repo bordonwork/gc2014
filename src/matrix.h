@@ -42,7 +42,7 @@ public:
   int Inverse(Matrix &m, float epsilon = 1e-08) const;
   int Inverse(float epsilon = 1e-08) { return Inverse(*this,epsilon); }
 
-  float det3x3(float a1,float a2,float a3,
+  float determ3x3(float a1,float a2,float a3,
 	     float b1,float b2,float b3,
 	     float c1,float c2,float c3);
 

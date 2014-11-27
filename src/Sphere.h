@@ -45,28 +45,29 @@ public:
 		}
 		else if (d == 0){
 
-			t = (-1.0 * b)/(2.0 * a);
+			t = (-1.0f * b)/(2.0f * a);
 
 		} else {
 
 			float raiz = sqrt(d);
 			//valor de t con la parte positiva de la raiz
-			float t_positivo = (-1.0 * b + raiz) / (2.0 * a);
+			float t_positivo = (-1.0f * b + raiz) / (2.0f * a);
 			//valor de t con la parte negativa de la raiz
-	    	float t_negativo = (-1.0 * b - raiz) / (2.0 * a);
+	    	float t_negativo = (-1.0f * b - raiz) / (2.0f * a);
 
-	    	if (t_positivo > tmin && t_negativo > tmin){
-	    		//si ambos valores son mayores a tmin, asignamos a t el menor de ambos. Es decir, el que mas cercano a t
+	    	if (t_positivo < tmin && t_negativo < tmin){
+	    		//si ambos valores son menores a tmin, asignamos a t el menor de ambos. Es decir, el que mas cercano a t
 				t = min(t_positivo, t_negativo);
 	    	} else {
-				//Si ambos valores son menores a tmin, asignamos a t el mayor de ambos. Es decir, el que mas cercano a t
-	    		t = (t_positivo > t_negativo)? t_positivo : t_negativo;
+				//Si ambos valores son mayores a tmin, asignamos a t el menor de ambos. Es decir, el que mas cercano a t
+	    		t = (t_positivo < t_negativo)? t_positivo : t_negativo;
 	    	}	
 		}
 
-		if ( t > tmin && t < h.getT()){
-
-	    	h.set(t, _color);
+		if ( t < tmin && t < h.getT()){
+			//el vector normal en el punto de interseccion
+			Vec3f n= ((_centro+(ray_direccion*t))-_centro)*2;
+	    	h.set(t, _color,n);
 	    	return true;
 	    }
         return false;

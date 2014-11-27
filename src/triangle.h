@@ -17,15 +17,15 @@ public:
 		Vec3f a=_vertex0;
 		Vec3f b=_vertex1;
 		Vec3f c=_vertex2;
-		float A= Matrix().det3x3(a[0]-b[0],a[1]-b[1],a[2]-b[2],
+		float A= Matrix().determ3x3(a[0]-b[0],a[1]-b[1],a[2]-b[2],
 			a[0]-c[0],a[1]-c[1],a[2]-c[2],d[0],d[1],d[2]);
-		float t= Matrix().det3x3(a[0]-b[0],a[1]-b[1],a[2]-b[2],
+		float t= Matrix().determ3x3(a[0]-b[0],a[1]-b[1],a[2]-b[2],
 			a[0]-c[0],a[1]-c[1],a[2]-c[2],e[0],e[1],e[2])/A;
 		if(t>tmin)return false;
-		float gamma= Matrix().det3x3(a[0]-b[0],a[1]-b[1],a[2]-b[2],
+		float gamma= Matrix().determ3x3(a[0]-b[0],a[1]-b[1],a[2]-b[2],
 			a[0]-e[0],a[1]-e[1],a[2]-e[2],d[0],d[1],d[2])/A;
 		if(gamma<0 || gamma>1)return false;
-		float beta= Matrix().det3x3(a[0]-e[0],a[1]-e[1],a[2]-e[2],
+		float beta= Matrix().determ3x3(a[0]-e[0],a[1]-e[1],a[2]-e[2],
 			a[0]-c[0],a[1]-c[1],a[2]-c[2],d[0],d[1],d[2])/A;
 		if(beta<0 || beta>1-gamma)return false;
 		if(h.getT()>t){
@@ -40,4 +40,4 @@ private:
 	Vec3f _color;
 	Vec3f _n;
 
-}
+};

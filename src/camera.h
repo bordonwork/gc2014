@@ -57,7 +57,7 @@ public:
 
 	virtual Ray generateRay(Vec2f& point);
 
-	virtual float getTMin(){ 
+	float getTMin(){ 
 		return 0.0f;
 	}
 

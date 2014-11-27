@@ -55,10 +55,10 @@ void parseArguments(int argc, char* argv[]) {
         } else if (!strcmp(argv[i],"-depth")) {
             i++;
             assert (i < argc);
-            depth_min = atof(argv[i]);
+            depth_min = (float)atof(argv[i]);
             i++;
             assert (i < argc);
-            depth_max = atof(argv[i]);
+            depth_max = (float)atof(argv[i]);
             i++;
             assert (i <= argc);
             depth_file = argv[i];

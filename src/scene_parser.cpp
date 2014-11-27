@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include <string.h>
-
+#include <math.h>
 #include "vectors.h"
 #include "matrix.h"
 #include "scene_parser.h"
@@ -16,7 +16,7 @@
 #include "transform.h"
 //#include "box.h"
 
-#define DegreesToRadians(x) ((M_PI * x) / 180.0f)
+#define DegreesToRadians(x) ((4.0*atan(1.0) * x) / 180.0f)
 
 // ====================================================================
 // ====================================================================

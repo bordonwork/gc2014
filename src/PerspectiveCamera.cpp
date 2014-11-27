@@ -29,4 +29,4 @@
 	    Vec3f direccion = (v*point.x()) + (u*point.y()) + (w*alfa);
 		direccion.Normalize();
 	    return Ray(direccion, _centro);
-}
+	}

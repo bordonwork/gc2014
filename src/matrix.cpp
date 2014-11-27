@@ -58,6 +58,12 @@ void Matrix::Transpose(Matrix &m) const {
   }
 }
 
+float Matrix::determ3x3(float a1,float a2,float a3,
+	     float b1,float b2,float b3,
+	     float c1,float c2,float c3){
+	return det3x3(a1,a2,a3,
+	     b1,b2,b3,c1,c2,c3 );
+}
 // ===================================================================
 // ===================================================================
 // INVERSE

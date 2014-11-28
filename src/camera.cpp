@@ -49,16 +49,17 @@ PerspectiveCamera::PerspectiveCamera(Vec3f& centro, Vec3f& direccion, Vec3f& vec
 
 	//Modificamos el vector vec_arriba para que sea ortonormal al vector direccion
 	// u = v x n
-	Vec3f::Cross3(u, v, w);
+	//Vec3f::Cross3(u, v, w);
+	u=vec_arriba;
 	u.Normalize();
 
 	_angulo = angulo;  
 }
 Ray PerspectiveCamera::generateRay(Vec2f point){
-	// alfa = 1/tan(ang/2)
-	float alfa = 1.0/tan(_angulo/2.0);
-	// 
-	Vec3f direccion = (v*point.x()) + (u*point.y()) + (w*alfa);
+	// alfa = 0.5/tan(ang/2)
+	float alfa = 0.5/tan(_angulo/2.0);
+	Vec3f origen=(v*(point.x()-0.5f)) + (u*(point.y()-0.5f)) + (w*alfa)+_centro;
+	Vec3f direccion=origen-_centro;
 	direccion.Normalize();
 	return Ray(direccion, _centro);
 }

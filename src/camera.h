@@ -53,7 +53,7 @@ public:
 	virtual Ray generateRay(Vec2f point);
 
 	float getTMin(){ 
-		return 0.0f;
+		return _centro[2];
 	}
 private:
 	Vec3f _centro;

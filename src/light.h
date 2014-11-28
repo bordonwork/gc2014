@@ -40,7 +40,8 @@ public:
     // the direction to the light is the opposite of the
     // direction of the directional light source
     dir = direction * (-1.0f);
-    col = color; }
+    col = color; 
+  }
 
 private:
 
@@ -49,9 +50,4 @@ private:
   Vec3f color;
 
 };
-
-// ====================================================================
-// ====================================================================
-
-
 #endif

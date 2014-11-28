@@ -13,6 +13,7 @@
 #include "vectors.h"
 #include "ray.h"
 #include "camera.h"
+#include "light.h"
 
 
 char* input_file = NULL; 
@@ -74,8 +75,8 @@ void parseArguments(int argc, char* argv[]) {
 
 
 int main(int argc, char* argv[]) {
-	char *argv1[] ={"raycast", "-input", "scene2.txt", "-size", "200", "200", "-depth", "5.5", "8.8", "scene2.tga"};
-	int argc1 =9;
+	//char *argv1[] ={"raycast", "-input", "scene1_difuse_light.txt", "-size", "200", "200","-output", "scene2.tga"};
+	//int argc1 =9;
     // Interpreta los argumentos del programa
     parseArguments(argc, argv);
 	//Pasamos al parser el archivo de entrada
@@ -94,15 +95,25 @@ int main(int argc, char* argv[]) {
 		for(int x=0; x<width; x++)
 		{
 			Vec2f point(x,y);
-			point/=float(width);
+			//float u = 0 + (1-0)*(point.x() + 0.5)/float(width);
+			//float v = 0 + (1-0)*(point.y() + 0.5)/float(height);
+	
+			point/=(float)width;
 			//Generamos un rayo por cada pixel
 			Ray rayo = camera->generateRay(point);
 			//Inicializamos Hit con con t= FLT_MAX y el color de fondo
 			Hit hit(FLT_MAX, color,Vec3f(0,0,0));
 			//Verificamos si existe interseccion
-			bool interseccion = objetos->intersect(rayo, hit, camera->getTMin());
-			//Pintamos el pixel con el color actualizado o color de fondo
-			salida->SetPixel(x,y,hit.getColor());
+			bool interseccion = objetos->intersect(rayo, hit,-100000);
+			Light* luz= escena->getLight(0);
+			Vec3f dir;
+			Vec3f color_luz_r;
+			Vec3f color_luz;
+			luz->getIllumination(dir,dir,color_luz);
+			Vec3f::Cross3(color_luz_r,escena->getAmbientLight(),color_luz);
+			Vec3f _color= hit.getColor()+(color_luz-escena->getAmbientLight())*(0.5*dir.Dot3(hit.getNormal()));
+			if(interseccion)salida->SetPixel(x,y,_color);
+			else salida->SetPixel(x,y,color);
 		    float t_aux = hit.getT();
 			float l = depth_max-depth_min;
 			//color entre 1.0 y 0.0 (blanco y negro)

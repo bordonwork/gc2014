@@ -54,19 +54,14 @@ public:
 			float t_positivo = (-1.0f * b + raiz) / (2.0f * a);
 			//valor de t con la parte negativa de la raiz
 	    	float t_negativo = (-1.0f * b - raiz) / (2.0f * a);
-
-	    	if (t_positivo < tmin && t_negativo < tmin){
-	    		//si ambos valores son menores a tmin, asignamos a t el menor de ambos. Es decir, el que mas cercano a t
-				t = min(t_positivo, t_negativo);
-	    	} else {
-				//Si ambos valores son mayores a tmin, asignamos a t el menor de ambos. Es decir, el que mas cercano a t
-	    		t = (t_positivo < t_negativo)? t_positivo : t_negativo;
-	    	}	
+			float t_mayor_positivo=max(tmin,t_negativo);
+			float t_mayor_negativo=max(tmin,t_negativo);
+			t=(t_mayor_positivo!=tmin && t_mayor_negativo!=tmin)? 
+				min(t_mayor_positivo,t_mayor_negativo): max(t_mayor_positivo,t_mayor_negativo);
 		}
-
-		if ( t < tmin && t < h.getT()){
+		if ( t >= tmin && t < h.getT()){
 			//el vector normal en el punto de interseccion
-			Vec3f n= ((_centro+(ray_direccion*t))-_centro)*2;
+			Vec3f n= ((r.getOrigin()+(ray_direccion*t))-_centro);
 			n.Normalize();
 			h.set(t, _color,n);
 	    	return true;

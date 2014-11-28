@@ -10,6 +10,7 @@ public:
 		_vertex2=c;
 		_color=color;
 		Vec3f::Cross3(_n,(b-a),(c-a));
+		_n.Normalize();
 	}
 	bool intersect(const Ray &r, Hit &h, float tmin){
 		Vec3f e=r.getOrigin();
@@ -21,7 +22,8 @@ public:
 			a[0]-c[0],a[1]-c[1],a[2]-c[2],d[0],d[1],d[2]);
 		float t= Matrix().determ3x3(a[0]-b[0],a[1]-b[1],a[2]-b[2],
 			a[0]-c[0],a[1]-c[1],a[2]-c[2],e[0],e[1],e[2])/A;
-		if(t>tmin)return false;
+
+		if(t<tmin)return false;
 		float gamma= Matrix().determ3x3(a[0]-b[0],a[1]-b[1],a[2]-b[2],
 			a[0]-e[0],a[1]-e[1],a[2]-e[2],d[0],d[1],d[2])/A;
 		if(gamma<0 || gamma>1)return false;
@@ -30,7 +32,9 @@ public:
 		if(beta<0 || beta>1-gamma)return false;
 		if(h.getT()>t){
 			h.set(t,_color,_n);
+			return true;
 		}
+		return false;
 	}
 
 private:

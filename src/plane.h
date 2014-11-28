@@ -9,6 +9,7 @@ public:
 		normal.Normalize();
 		_normal = normal;
 		_d = d;
+		_color=color;
 	}
 	//Destructor
 	//~Plane() {}
@@ -41,7 +42,7 @@ public:
 
 		float t = -1.0 *(numerador)/(denominador);
 
-		if( t > tmin && t < hit.getT()){
+		if( t >= tmin && t < hit.getT()){
 			hit.set(t, _color, _normal);
 			return true;
 		} else {
@@ -56,5 +57,5 @@ protected:
 	Vec3f _normal;
 	//distancia del origen
 	float _d;
-
+	Vec3f _color;
 };

@@ -1,6 +1,3 @@
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
-
 #include "ray.h"
 
 class Camera
@@ -43,24 +40,21 @@ private:
 	float _tamano;
 	Vec3f _horizontal;
 };
-
 //Camara Perspectiva
 class PerspectiveCamera:public Camera {
 
 public:
 	//Constructor
-	PerspectiveCamera (Vec3f& centro, Vec3f& direccion, Vec3f& vec_arriba, float angulo);
+	PerspectiveCamera(Vec3f& centro, Vec3f& direccion, Vec3f& vec_arriba, float angulo);
 
 	//Destructor
 	~PerspectiveCamera(){}
 
-
-	virtual Ray generateRay(Vec2f& point);
+	virtual Ray generateRay(Vec2f point);
 
 	float getTMin(){ 
 		return 0.0f;
 	}
-
 private:
 	Vec3f _centro;
 	Vec3f u;
@@ -68,4 +62,3 @@ private:
 	Vec3f w;
 	float _angulo;
 };
-#endif

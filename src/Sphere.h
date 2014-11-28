@@ -67,7 +67,8 @@ public:
 		if ( t < tmin && t < h.getT()){
 			//el vector normal en el punto de interseccion
 			Vec3f n= ((_centro+(ray_direccion*t))-_centro)*2;
-	    	h.set(t, _color,n);
+			n.Normalize();
+			h.set(t, _color,n);
 	    	return true;
 	    }
         return false;

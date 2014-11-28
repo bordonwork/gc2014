@@ -11,7 +11,7 @@ public:
 		_color=color;
 		Vec3f::Cross3(_n,(b-a),(c-a));
 	}
-	virtual bool intersect(const Ray &r, Hit &h, float tmin){
+	bool intersect(const Ray &r, Hit &h, float tmin){
 		Vec3f e=r.getOrigin();
 		Vec3f d=r.getDirection();
 		Vec3f a=_vertex0;

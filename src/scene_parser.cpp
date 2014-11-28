@@ -6,7 +6,7 @@
 #include "matrix.h"
 #include "scene_parser.h"
 
-#include "camera.h" 
+#include "camera.h"
 #include "light.h"
 #include "object3d.h"
 #include "group.h" 

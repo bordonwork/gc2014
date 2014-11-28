@@ -73,9 +73,9 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="matrix.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PerspectiveCamera.cpp" />
     <ClCompile Include="scene_parser.cpp" />
     <ClCompile Include="sphere.cpp" />
+    <ClCompile Include="transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />

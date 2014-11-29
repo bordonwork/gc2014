@@ -109,11 +109,24 @@ int main(int argc, char* argv[]) {
 			Vec3f dir;
 			Vec3f color_luz_r;
 			Vec3f color_luz;
+			float r=0.0, g=0.0, b=0.0;
 			luz->getIllumination(dir,dir,color_luz);
-			Vec3f::Cross3(color_luz_r,escena->getAmbientLight(),color_luz);
-			Vec3f _color= hit.getColor()+(color_luz-escena->getAmbientLight())*(0.5*dir.Dot3(hit.getNormal()));
+			float d= dir.Dot3(hit.getNormal());
+			if(d < 0.0f) d = -d;
+
+			Vec3f _color (0.0, 0.0, 0.0);
+
+			_color = _color + (hit.getColor()*d);
+			//_color= _color + hit.getColor()+(escena->getAmbientLight())*(dir.Dot3(hit.getNormal()));
+
 			if(interseccion)salida->SetPixel(x,y,_color);
 			else salida->SetPixel(x,y,color);
+
+			/*Vec3f::Cross3(color_luz_r,escena->getAmbientLight(),color_luz);
+			Vec3f _color= hit.getColor()+(color_luz-escena->getAmbientLight())*(0.5*dir.Dot3(hit.getNormal()));
+			if(interseccion)salida->SetPixel(x,y,_color);
+			else salida->SetPixel(x,y,color);*/
+
 		    float t_aux = hit.getT();
 			float l = depth_max-depth_min;
 			//color entre 1.0 y 0.0 (blanco y negro)

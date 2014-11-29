@@ -57,8 +57,8 @@ public:
 	}
 private:
 	Vec3f _centro;
-	Vec3f u;
-	Vec3f v;
-	Vec3f w;
+	Vec3f _direccion;
+	Vec3f _horizontal;
+	Vec3f _up;
 	float _angulo;
 };
